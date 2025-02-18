@@ -19,6 +19,7 @@ class BeTalentTest extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: Theme.of(context).appBarTheme.copyWith(
                 color: AppColors.white,

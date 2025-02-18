@@ -1,16 +1,95 @@
-# betalent_mobile
+# BeTalent Mobile
 
-A new Flutter project.
+Aplicativo Flutter para visualização de funcionários.
 
-## Getting Started
+## Funcionalidades
 
-This project is a starting point for a Flutter application.
+- ### Listagem
 
-A few resources to get you started if this is your first Flutter project:
+  Listagem de funcionários, com dados como foto, nome, telefone, cargo e data de admissão.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- ### Pesquisa
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  Pesquisa de funcionários através de nome, telefone e cargo.
+
+## Tecnologias
+
+- **Mobile:** [Flutter](https://docs.flutter.dev/).
+
+- **API:** [Local - Json-Server](https://www.npmjs.com/package/json-server/).
+
+## Bibliotecas Externas
+
+- **_Gerenciamento de Estado:_** [GetX](https://pub.dev/packages/get).
+
+- **_Conexão HTTP:_** [HTTP](https://pub.dev/packages/http).
+
+## Rodando
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/joaovvn/betalent_test.git
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   dart pub get
+   ```
+
+3. Escolha o seu emulador:
+
+   O emulador **deve** usar API Android 21 ou acima, preferencialmente acima da 35.
+
+4. Rode a aplicação:
+
+   ```bash
+   flutter run
+   ```
+
+## Estrutura do projeto
+
+- ### lib/core
+
+  Essenciais para o funcionamento do aplicativo.
+
+  - #### lib/core/constants
+
+    Constantes.
+
+  - #### lib/core/services
+
+    Serviços como a conexão com a API.
+
+  - #### lib/core/utils
+
+    Utilitários.
+
+- ### lib/features
+
+  Implementação das telas.
+
+  - #### lib/features/####/view
+
+    Contém a interface.
+
+  - #### lib/features/####/view_model
+
+    Contém o ViewModel da tela, que é toda a conexão entre os objetos e a interface.
+
+  - #### lib/features/####/widgets
+
+    Contém widgets específicos da tela.
+
+- ### lib/shared
+
+  Conteúdo compartilhado do aplicativo
+
+  - #### lib/shared/models
+
+    Objetos.
+
+  - #### lib/shared/repositories
+
+    Conexão entre a API e os ViewModels.

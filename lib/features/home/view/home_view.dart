@@ -1,4 +1,5 @@
 import 'package:betalent_mobile/core/constants/app_colors.dart';
+import 'package:betalent_mobile/core/constants/app_icons.dart';
 import 'package:betalent_mobile/core/constants/app_images.dart';
 import 'package:betalent_mobile/features/home/view_model/home_view_model.dart';
 import 'package:betalent_mobile/features/home/widgets/custom_search_bar.dart';
@@ -50,36 +51,52 @@ class HomeView extends StatelessWidget {
                       children: [
                         ListHeader(),
                         Obx(() {
-                          return ListView.separated(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: _homeViewModel.employeeList.length,
-                              separatorBuilder: (context, index) => Divider(
-                                    color: AppColors.gray10,
-                                    thickness: 1.0,
+                          return _homeViewModel.employeeList.isEmpty
+                              ? SizedBox(
+                                  height: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(AppIcons.missing),
+                                      Text(
+                                        "Nenhum funcionário encontrado",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
+                                      ),
+                                    ],
                                   ),
-                              itemBuilder: (context, index) {
-                                Employee employee =
-                                    _homeViewModel.employeeList[index];
-                                bool isCollapsed = false;
-                                return Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      16.0, 13.5, 16.0, 12.5),
-                                  child: GetBuilder<HomeViewModel>(
-                                      id: "item_${employee.id}",
-                                      builder: (_) {
-                                        return EmployeeCard(
-                                            employee: employee,
-                                            onTap: () {
-                                              isCollapsed = !isCollapsed;
-                                              _homeViewModel
-                                                  .updateWidget(employee.id);
-                                            },
-                                            isCollapsed: isCollapsed);
-                                      }),
-                                );
-                              });
+                                )
+                              : ListView.separated(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: _homeViewModel.employeeList.length,
+                                  separatorBuilder: (context, index) => Divider(
+                                        color: AppColors.gray10,
+                                        thickness: 1.0,
+                                      ),
+                                  itemBuilder: (context, index) {
+                                    Employee employee =
+                                        _homeViewModel.employeeList[index];
+                                    bool isCollapsed = false;
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          16.0, 13.5, 16.0, 12.5),
+                                      child: GetBuilder<HomeViewModel>(
+                                          id: "item_${employee.id}",
+                                          builder: (_) {
+                                            return EmployeeCard(
+                                                employee: employee,
+                                                onTap: () {
+                                                  isCollapsed = !isCollapsed;
+                                                  _homeViewModel.updateWidget(
+                                                      employee.id);
+                                                },
+                                                isCollapsed: isCollapsed);
+                                          }),
+                                    );
+                                  });
                         })
                       ],
                     ),
