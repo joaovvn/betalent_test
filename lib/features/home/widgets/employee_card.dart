@@ -24,9 +24,30 @@ class EmployeeCard extends StatelessWidget {
           children: [
             SizedBox(
               width: 34,
+              height: 34,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(360),
-                child: Image.network(employee.image),
+                child: Image.network(
+                  employee.image,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return CircularProgressIndicator(
+                      color: AppColors.blue,
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    );
+                  },
+                  errorBuilder: (context, exception, stackTrace) {
+                    return Icon(
+                      Icons.image_not_supported,
+                      color: AppColors.blue,
+                      size: 25,
+                    );
+                  },
+                ),
               ),
             ),
             Expanded(
