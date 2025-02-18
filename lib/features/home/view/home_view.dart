@@ -1,4 +1,5 @@
 import 'package:betalent_mobile/core/constants/app_colors.dart';
+import 'package:betalent_mobile/core/constants/app_icons.dart';
 import 'package:betalent_mobile/core/constants/app_images.dart';
 import 'package:betalent_mobile/features/home/view_model/home_view_model.dart';
 import 'package:betalent_mobile/features/home/widgets/custom_search_bar.dart';
@@ -51,11 +52,20 @@ class HomeView extends StatelessWidget {
                         ListHeader(),
                         Obx(() {
                           return _homeViewModel.employeeList.isEmpty
-                              ? Text(
-                                  "Nenhum funcionário encontrado",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                              ? SizedBox(
+                                  height: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(AppIcons.missing),
+                                      Text(
+                                        "Nenhum funcionário encontrado",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
+                                      ),
+                                    ],
+                                  ),
                                 )
                               : ListView.separated(
                                   shrinkWrap: true,
