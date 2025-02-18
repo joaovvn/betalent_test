@@ -50,36 +50,43 @@ class HomeView extends StatelessWidget {
                       children: [
                         ListHeader(),
                         Obx(() {
-                          return ListView.separated(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: _homeViewModel.employeeList.length,
-                              separatorBuilder: (context, index) => Divider(
-                                    color: AppColors.gray10,
-                                    thickness: 1.0,
-                                  ),
-                              itemBuilder: (context, index) {
-                                Employee employee =
-                                    _homeViewModel.employeeList[index];
-                                bool isCollapsed = false;
-                                return Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      16.0, 13.5, 16.0, 12.5),
-                                  child: GetBuilder<HomeViewModel>(
-                                      id: "item_${employee.id}",
-                                      builder: (_) {
-                                        return EmployeeCard(
-                                            employee: employee,
-                                            onTap: () {
-                                              isCollapsed = !isCollapsed;
-                                              _homeViewModel
-                                                  .updateWidget(employee.id);
-                                            },
-                                            isCollapsed: isCollapsed);
-                                      }),
-                                );
-                              });
+                          return _homeViewModel.employeeList.isEmpty
+                              ? Text(
+                                  "Nenhum funcionário encontrado",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
+                                )
+                              : ListView.separated(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: _homeViewModel.employeeList.length,
+                                  separatorBuilder: (context, index) => Divider(
+                                        color: AppColors.gray10,
+                                        thickness: 1.0,
+                                      ),
+                                  itemBuilder: (context, index) {
+                                    Employee employee =
+                                        _homeViewModel.employeeList[index];
+                                    bool isCollapsed = false;
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          16.0, 13.5, 16.0, 12.5),
+                                      child: GetBuilder<HomeViewModel>(
+                                          id: "item_${employee.id}",
+                                          builder: (_) {
+                                            return EmployeeCard(
+                                                employee: employee,
+                                                onTap: () {
+                                                  isCollapsed = !isCollapsed;
+                                                  _homeViewModel.updateWidget(
+                                                      employee.id);
+                                                },
+                                                isCollapsed: isCollapsed);
+                                          }),
+                                    );
+                                  });
                         })
                       ],
                     ),
